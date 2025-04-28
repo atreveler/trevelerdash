@@ -2,256 +2,148 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Loberiam Central</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Growth Estratégico</title>
   <style>
+    /* Estilo base */
     body {
       margin: 0;
-      font-family: 'Inter', sans-serif;
-      background-color: #121212;
-      color: #f0f0f0;
+      font-family: 'Arial', sans-serif;
+      background-color: #111;
+      color: #fff;
+      scroll-behavior: smooth;
     }
     header {
-      background-color: #1e1e1e;
+      background-color: #222;
       padding: 1rem;
       text-align: center;
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       font-weight: bold;
-      color: #00BFFF;
     }
     nav {
-      background-color: #1a1a1a;
       display: flex;
       justify-content: center;
-      gap: 2rem;
-      padding: 1rem;
+      background-color: #333;
+      padding: 0.5rem 0;
+      flex-wrap: wrap;
     }
     nav a {
-      color: #ccc;
+      color: #fff;
       text-decoration: none;
-      font-weight: 500;
+      margin: 0 1rem;
+      font-size: 1rem;
+      transition: color 0.3s;
     }
     nav a:hover {
-      color: #00BFFF;
+      color: #00bcd4;
     }
-    .dashboard {
-      padding: 2rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
+    section {
+      padding: 4rem 2rem;
+      border-bottom: 1px solid #444;
+      max-width: 900px;
+      margin: auto;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
     }
-    .card {
-      background-color: #1f1f1f;
-      padding: 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 191, 255, 0.2);
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    h2 {
+      color: #00bcd4;
+      margin-bottom: 1rem;
+    }
+    footer {
+      background-color: #222;
       text-align: center;
-    }
-    .chart-container {
-      background-color: #1f1f1f;
-      margin: 2rem;
       padding: 1rem;
-      border-radius: 10px;
+      font-size: 0.9rem;
     }
-    .financeiro {
-      padding: 2rem;
+    #topo {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #00bcd4;
+      color: #111;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.9rem;
+      box-shadow: 0 0 10px #00bcd4;
     }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background-color: #1f1f1f;
-    }
-    th, td {
-      padding: 1rem;
-      text-align: center;
-      border-bottom: 1px solid #333;
-    }
-    th {
-      color: #00BFFF;
+    #topo:hover {
+      background-color: #0097a7;
     }
   </style>
 </head>
 <body>
 
-<header>Loberiam - Central de Gestão</header>
+  <header>
+    Growth Estratégico
+  </header>
 
-<nav>
-  <a href="#dashboard">Dashboard</a>
-  <a href="#financeiro">Financeiro</a>
-  <a href="#marketing">Marketing</a>
-  <a href="#comercial">Comercial</a>
-  <a href="#estrategias">Estratégias</a>
-</nav>
+  <nav>
+    <a href="#dashboard">Dashboard</a>
+    <a href="#financeiro">Financeiro</a>
+    <a href="#marketing">Marketing</a>
+    <a href="#comercial">Comercial</a>
+    <a href="#estrategias">Estratégias</a>
+  </nav>
 
-<section id="dashboard" class="dashboard">
-  <div class="card">
-    <h3>Faturamento</h3>
-    <p>R$ 12.500,00</p>
-  </div>
-  <div class="card">
-    <h3>Lucro</h3>
-    <p>R$ 4.800,00</p>
-  </div>
-  <div class="card">
-    <h3>Gastos</h3>
-    <p>R$ 7.700,00</p>
-  </div>
-</section>
+  <section id="dashboard">
+    <h2>Dashboard</h2>
+    <p>Visão geral das principais métricas e indicadores do seu negócio.</p>
+  </section>
 
-<section class="chart-container">
-  <h2 style="text-align: center; color: #00BFFF;">Resumo Financeiro</h2>
-  <canvas id="financeChart"></canvas>
-</section>
+  <section id="financeiro">
+    <h2>Financeiro</h2>
+    <p>Controle financeiro completo para garantir a saúde do seu negócio.</p>
+  </section>
 
-<section id="financeiro" class="financeiro">
-  <h2 style="color: #00BFFF;">Financeiro</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Data</th>
-        <th>Descrição</th>
-        <th>Categoria</th>
-        <th>Valor (R$)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>01/05/2025</td>
-        <td>Venda Produto A</td>
-        <td>Receita</td>
-        <td>2.000,00</td>
-      </tr>
-      <tr>
-        <td>02/05/2025</td>
-        <td>Compra Estoque</td>
-        <td>Despesa</td>
-        <td>-800,00</td>
-      </tr>
-      <tr>
-        <td>03/05/2025</td>
-        <td>Campanha Instagram</td>
-        <td>Marketing</td>
-        <td>-200,00</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+  <section id="marketing">
+    <h2>Marketing</h2>
+    <p>Planejamento e execução de campanhas para aumentar a visibilidade da marca.</p>
+  </section>
 
-<script>
-const ctx = document.getElementById('financeChart').getContext('2d');
-new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Faturamento', 'Lucro', 'Gastos'],
-        datasets: [{
-            label: 'Valores em R$',
-            data: [12500, 4800, 7700],
-            backgroundColor: [
-              '#00BFFF',
-              '#32CD32',
-              '#FF4500'
-            ]
-        }]
-    },
-    options: {
-      responsive: true,
-      scales: {
-          y: {
-              beginAtZero: true,
-              ticks: { color: '#f0f0f0' },
-              grid: { color: '#333' }
-          },
-          x: {
-              ticks: { color: '#f0f0f0' },
-              grid: { color: '#333' }
-          }
-      },
-      plugins: {
-          legend: { labels: { color: '#f0f0f0' } }
-      }
-    }
-});
-</script>
+  <section id="comercial">
+    <h2>Comercial</h2>
+    <p>Estratégias de vendas e acompanhamento de performance comercial.</p>
+  </section>
+
+  <section id="estrategias">
+    <h2>Estratégias</h2>
+    <p>Definição de metas, OKRs e planejamento estratégico para crescimento sustentável.</p>
+  </section>
+
+  <button id="topo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    ↑ Topo
+  </button>
+
+  <footer>
+    &copy; 2025 Growth Estratégico - Todos os direitos reservados
+  </footer>
+
+  <script>
+    // Função para animar as seções ao rolar a página
+    const sections = document.querySelectorAll('section');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.2
+    });
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+  </script>
 
 </body>
 </html>
-<section id="marketing" class="financeiro">
-  <h2 style="color: #00BFFF;">Marketing</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Data</th>
-        <th>Campanha</th>
-        <th>Canal</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>05/05/2025</td>
-        <td>Promoção Dia das Mães</td>
-        <td>Instagram</td>
-        <td>Em andamento</td>
-      </tr>
-      <tr>
-        <td>10/05/2025</td>
-        <td>Campanha TikTok</td>
-        <td>TikTok</td>
-        <td>Planejado</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
-<section id="comercial" class="financeiro">
-  <h2 style="color: #00BFFF;">Comercial</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Data</th>
-        <th>Produto</th>
-        <th>Fornecedor</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>02/05/2025</td>
-        <td>Smartwatch Pro</td>
-        <td>Fornecedor X</td>
-        <td>Recebido</td>
-      </tr>
-      <tr>
-        <td>03/05/2025</td>
-        <td>Luminária LED</td>
-        <td>Fornecedor Y</td>
-        <td>Pendente</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
-<section id="estrategias" class="financeiro">
-  <h2 style="color: #00BFFF;">Estratégias</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Objetivo</th>
-        <th>Prazo</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Aumentar 20% o faturamento</td>
-        <td>30/06/2025</td>
-        <td>Em andamento</td>
-      </tr>
-      <tr>
-        <td>Expandir para 3 novos fornecedores</td>
-        <td>31/07/2025</td>
-        <td>Planejado</td>
-      </tr>
-    </tbody>
-  </table>
-</section>

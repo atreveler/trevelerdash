@@ -2,148 +2,78 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Growth Estratégico</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loberiam Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /* Estilo base */
-    body {
-      margin: 0;
-      font-family: 'Arial', sans-serif;
-      background-color: #111;
-      color: #fff;
-      scroll-behavior: smooth;
-    }
-    header {
-      background-color: #222;
-      padding: 1rem;
-      text-align: center;
-      font-size: 1.8rem;
-      font-weight: bold;
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      background-color: #333;
-      padding: 0.5rem 0;
-      flex-wrap: wrap;
-    }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      margin: 0 1rem;
-      font-size: 1rem;
-      transition: color 0.3s;
-    }
-    nav a:hover {
-      color: #00bcd4;
-    }
-    section {
-      padding: 4rem 2rem;
-      border-bottom: 1px solid #444;
-      max-width: 900px;
-      margin: auto;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s ease-out;
-    }
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    h2 {
-      color: #00bcd4;
-      margin-bottom: 1rem;
-    }
-    footer {
-      background-color: #222;
-      text-align: center;
-      padding: 1rem;
-      font-size: 0.9rem;
-    }
-    #topo {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #00bcd4;
-      color: #111;
-      padding: 0.5rem 1rem;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 0.9rem;
-      box-shadow: 0 0 10px #00bcd4;
-    }
-    #topo:hover {
-      background-color: #0097a7;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+    body { background-color: #111; color: #eee; display: flex; min-height: 100vh; }
+    .sidebar { width: 250px; background: #0a0a0a; padding: 20px; }
+    .sidebar h1 { font-size: 24px; color: #3fa9f5; margin-bottom: 30px; }
+    .sidebar nav a { display: block; color: #bbb; text-decoration: none; margin: 15px 0; transition: 0.3s; }
+    .sidebar nav a:hover { color: #3fa9f5; }
+    .content { flex: 1; padding: 40px; }
+    .cards { display: flex; gap: 20px; margin-bottom: 40px; }
+    .card { background: #1a1a1a; flex: 1; padding: 20px; border-radius: 10px; }
+    .card h3 { color: #3fa9f5; margin-bottom: 10px; }
+    canvas { background: #1a1a1a; padding: 20px; border-radius: 10px; }
   </style>
 </head>
 <body>
+  <aside class="sidebar">
+    <h1>Loberiam</h1>
+    <nav>
+      <a href="#dashboard">Dashboard</a>
+      <a href="#financeiro">Financeiro</a>
+      <a href="#marketing">Marketing</a>
+      <a href="#comercial">Comercial</a>
+      <a href="#estrategias">Estratégias</a>
+      <a href="#pmr">PMR</a>
+    </nav>
+  </aside>
 
-  <header>
-    Growth Estratégico
-  </header>
+  <main class="content">
+    <section id="dashboard">
+      <div class="cards">
+        <div class="card">
+          <h3>Faturamento</h3>
+          <p>R$ 0,00</p>
+        </div>
+        <div class="card">
+          <h3>Lucro</h3>
+          <p>R$ 0,00</p>
+        </div>
+        <div class="card">
+          <h3>Gastos</h3>
+          <p>R$ 0,00</p>
+        </div>
+      </div>
+      <canvas id="grafico" width="400" height="200"></canvas>
+    </section>
+  </main>
 
-  <nav>
-    <a href="#dashboard">Dashboard</a>
-    <a href="#financeiro">Financeiro</a>
-    <a href="#marketing">Marketing</a>
-    <a href="#comercial">Comercial</a>
-    <a href="#estrategias">Estratégias</a>
-  </nav>
-
-  <section id="dashboard">
-    <h2>Dashboard</h2>
-    <p>Visão geral das principais métricas e indicadores do seu negócio.</p>
-  </section>
-
-  <section id="financeiro">
-    <h2>Financeiro</h2>
-    <p>Controle financeiro completo para garantir a saúde do seu negócio.</p>
-  </section>
-
-  <section id="marketing">
-    <h2>Marketing</h2>
-    <p>Planejamento e execução de campanhas para aumentar a visibilidade da marca.</p>
-  </section>
-
-  <section id="comercial">
-    <h2>Comercial</h2>
-    <p>Estratégias de vendas e acompanhamento de performance comercial.</p>
-  </section>
-
-  <section id="estrategias">
-    <h2>Estratégias</h2>
-    <p>Definição de metas, OKRs e planejamento estratégico para crescimento sustentável.</p>
-  </section>
-
-  <button id="topo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-    ↑ Topo
-  </button>
-
-  <footer>
-    &copy; 2025 Growth Estratégico - Todos os direitos reservados
-  </footer>
-
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-    // Função para animar as seções ao rolar a página
-    const sections = document.querySelectorAll('section');
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+    const ctx = document.getElementById('grafico').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril'],
+        datasets: [{
+          label: 'Faturamento',
+          data: [12000, 19000, 3000, 5000],
+          backgroundColor: '#3fa9f5'
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { labels: { color: 'white' } } },
+        scales: {
+          x: { ticks: { color: 'white' } },
+          y: { ticks: { color: 'white' } }
         }
-      });
-    }, {
-      threshold: 0.2
-    });
-
-    sections.forEach(section => {
-      observer.observe(section);
+      }
     });
   </script>
-
 </body>
 </html>

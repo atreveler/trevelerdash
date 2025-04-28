@@ -64,3 +64,208 @@
       background-color: #1f1f1f;
       margin-top: 1rem;
       border-radius: 8px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 1rem;
+      text-align: center;
+      border-bottom: 1px solid #333;
+    }
+    th {
+      color: #00BFFF;
+      background-color: #1a1a1a;
+    }
+    h2 {
+      text-align: center;
+      color: #00BFFF;
+    }
+  </style>
+</head>
+<body>
+
+<header>Loberiam - Central de Gestão</header>
+
+<nav>
+  <a href="#dashboard">Dashboard</a>
+  <a href="#financeiro">Financeiro</a>
+  <a href="#marketing">Marketing</a>
+  <a href="#comercial">Comercial</a>
+  <a href="#estrategias">Estratégias</a>
+</nav>
+
+<!-- DASHBOARD -->
+<section id="dashboard">
+  <div class="dashboard">
+    <div class="card">
+      <h3>Faturamento</h3>
+      <p>R$ 12.500,00</p>
+    </div>
+    <div class="card">
+      <h3>Lucro</h3>
+      <p>R$ 4.800,00</p>
+    </div>
+    <div class="card">
+      <h3>Gastos</h3>
+      <p>R$ 7.700,00</p>
+    </div>
+  </div>
+
+  <div class="chart-container">
+    <h2>Resumo Financeiro</h2>
+    <canvas id="financeChart"></canvas>
+  </div>
+</section>
+
+<!-- FINANCEIRO -->
+<section id="financeiro">
+  <h2>Financeiro</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Descrição</th>
+        <th>Categoria</th>
+        <th>Valor (R$)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>01/05/2025</td>
+        <td>Venda Produto A</td>
+        <td>Receita</td>
+        <td>2.000,00</td>
+      </tr>
+      <tr>
+        <td>02/05/2025</td>
+        <td>Compra Estoque</td>
+        <td>Despesa</td>
+        <td>-800,00</td>
+      </tr>
+      <tr>
+        <td>03/05/2025</td>
+        <td>Campanha Instagram</td>
+        <td>Marketing</td>
+        <td>-200,00</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- MARKETING -->
+<section id="marketing">
+  <h2>Marketing</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Campanha</th>
+        <th>Canal</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>05/05/2025</td>
+        <td>Promoção Dia das Mães</td>
+        <td>Instagram</td>
+        <td>Em andamento</td>
+      </tr>
+      <tr>
+        <td>10/05/2025</td>
+        <td>Campanha TikTok</td>
+        <td>TikTok</td>
+        <td>Planejado</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- COMERCIAL -->
+<section id="comercial">
+  <h2>Comercial</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Produto</th>
+        <th>Fornecedor</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>02/05/2025</td>
+        <td>Smartwatch Pro</td>
+        <td>Fornecedor X</td>
+        <td>Recebido</td>
+      </tr>
+      <tr>
+        <td>03/05/2025</td>
+        <td>Luminária LED</td>
+        <td>Fornecedor Y</td>
+        <td>Pendente</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ESTRATÉGIAS -->
+<section id="estrategias">
+  <h2>Estratégias</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Objetivo</th>
+        <th>Prazo</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Aumentar 20% o faturamento</td>
+        <td>30/06/2025</td>
+        <td>Em andamento</td>
+      </tr>
+      <tr>
+        <td>Expandir para 3 novos fornecedores</td>
+        <td>31/07/2025</td>
+        <td>Planejado</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<script>
+const ctx = document.getElementById('financeChart').getContext('2d');
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Faturamento', 'Lucro', 'Gastos'],
+        datasets: [{
+            label: 'Valores em R$',
+            data: [12500, 4800, 7700],
+            backgroundColor: ['#00BFFF', '#32CD32', '#FF4500']
+        }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+          y: {
+              beginAtZero: true,
+              ticks: { color: '#f0f0f0' },
+              grid: { color: '#333' }
+          },
+          x: {
+              ticks: { color: '#f0f0f0' },
+              grid: { color: '#333' }
+          }
+      },
+      plugins: {
+          legend: { labels: { color: '#f0f0f0' } }
+      }
+    }
+});
+</script>
+
+</body>
+</html>
